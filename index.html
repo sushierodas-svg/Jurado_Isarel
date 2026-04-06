@@ -68,7 +68,7 @@
             border: 12px solid #d4af37;
             border-image: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            background: #1a202c;
+            background: #f8fafc;
             width: 100%;
             aspect-ratio: 4/5;
             max-width: 320px;
@@ -79,38 +79,6 @@
             justify-content: center;
             align-items: center;
         }
-
-        #jurado-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .loading-overlay {
-            position: absolute;
-            inset: 0;
-            background: #1a202c;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            z-index: 10;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-left-color: #ff7e26;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
 
         .name-title {
             color: #1a4a8d;
@@ -148,14 +116,6 @@
             0%, 100% { opacity: 0; transform: scale(0.5); }
             50% { opacity: 1; transform: scale(1.3); }
         }
-
-        .status-text {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-top: 15px;
-            color: #ff7e26;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -175,11 +135,39 @@
                 
                 <div class="w-full max-w-[340px] flex-shrink-0">
                     <div class="gold-frame">
-                        <div id="loading" class="loading-overlay">
-                            <div class="spinner"></div>
-                            <span id="loading-msg" class="status-text uppercase">Inspirando música...</span>
-                        </div>
-                        <img id="jurado-image" src="" alt="Israel enseñando música" class="opacity-0">
+                        <!-- Ilustración Fija de Director Musical -->
+                        <svg viewBox="0 0 400 500" class="w-full h-full bg-blue-50">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f1f5f9;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="500" fill="url(#grad1)" />
+                            
+                            <!-- Silueta de Director/Maestro (Joven Masculino) -->
+                            <path d="M200,450 L200,350 M200,350 L160,380 M200,350 L240,380 M200,350 C180,350 160,330 160,300 L160,200 C160,160 180,140 200,140 C220,140 240,160 240,200 L240,300 C240,330 220,350 200,350 Z" fill="#1a4a8d" opacity="0.8"/>
+                            <circle cx="200" cy="100" r="40" fill="#1a4a8d" opacity="0.8"/>
+                            
+                            <!-- Batuta y Notas -->
+                            <line x1="240" y1="200" x2="320" y2="120" stroke="#ff7e26" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M320,120 Q350,100 330,70" fill="none" stroke="#ff7e26" stroke-width="2" opacity="0.6"/>
+                            
+                            <!-- Notas musicales flotantes -->
+                            <circle cx="100" cy="150" r="8" fill="#ff7e26"/>
+                            <path d="M108,150 L108,120 L125,130" fill="none" stroke="#ff7e26" stroke-width="3"/>
+                            
+                            <circle cx="280" cy="250" r="6" fill="#1a4a8d"/>
+                            <path d="M286,250 L286,220" stroke="#1a4a8d" stroke-width="2"/>
+                            
+                            <circle cx="80" cy="300" r="5" fill="#1a4a8d"/>
+                            <path d="M85,300 L85,270" stroke="#1a4a8d" stroke-width="2"/>
+                            
+                            <!-- Elementos de enseñanza (Símbolos) -->
+                            <text x="50" y="450" font-family="Montserrat" font-size="20" fill="#ff7e26" opacity="0.5" font-weight="bold">DO RE MI</text>
+                        </svg>
+
+                        <!-- Brillos animados sobre el marco -->
                         <div class="sparkle" style="top: 5%; left: 5%;"></div>
                         <div class="sparkle" style="bottom: 8%; right: 12%; animation-delay: 1.5s;"></div>
                     </div>
@@ -220,77 +208,5 @@
         </div>
     </main>
 
-    <script>
-        const statusMessages = [
-            "Inspirando música...",
-            "Afinando instrumentos...",
-            "Componiendo la escena...",
-            "Pintando acordes...",
-            "Casi listo..."
-        ];
-
-        let messageIndex = 0;
-        const msgElement = document.getElementById('loading-msg');
-
-        // Rotar mensajes para que no parezca "congelado"
-        const messageInterval = setInterval(() => {
-            messageIndex = (messageIndex + 1) % statusMessages.length;
-            if (msgElement) msgElement.innerText = statusMessages[messageIndex];
-        }, 3000);
-
-        async function generateArtisticImage() {
-            const apiKey = "";
-            const imgElement = document.getElementById('jurado-image');
-            const loadingElement = document.getElementById('loading');
-            
-            const prompt = "A heartwarming professional digital painting of a young Hispanic male music teacher with a warm smile, teaching a group of happy children how to play musical instruments. The scene is magical, with shimmery musical notes floating in the air, gold particles, set against a bright blue sky with soft white clouds. Cinematic lighting, vibrant colors, artistic and inspiring style for an art festival.";
-
-            let retries = 0;
-            const maxRetries = 5;
-
-            async function attempt() {
-                try {
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            instances: [{ prompt: prompt }],
-                            parameters: { sampleCount: 1 }
-                        })
-                    });
-
-                    if (!response.ok) throw new Error('API Error');
-
-                    const result = await response.json();
-                    
-                    if (result.predictions && result.predictions[0]) {
-                        const base64 = result.predictions[0].bytesBase64Encoded;
-                        imgElement.src = `data:image/png;base64,${base64}`;
-                        imgElement.onload = () => {
-                            clearInterval(messageInterval);
-                            loadingElement.style.display = 'none';
-                            imgElement.classList.replace('opacity-0', 'opacity-100');
-                        };
-                    } else {
-                        throw new Error('No image in response');
-                    }
-
-                } catch (error) {
-                    if (retries < maxRetries) {
-                        retries++;
-                        const delay = Math.pow(2, retries) * 1000;
-                        setTimeout(attempt, delay);
-                    } else {
-                        clearInterval(messageInterval);
-                        loadingElement.innerHTML = '<span class="text-xs p-4 text-center text-orange-400">LA INSPIRACIÓN TOMA SU TIEMPO...<br>RECARGA PARA VOLVER A INTENTAR</span>';
-                    }
-                }
-            }
-
-            attempt();
-        }
-
-        window.onload = generateArtisticImage;
-    </script>
 </body>
 </html>
