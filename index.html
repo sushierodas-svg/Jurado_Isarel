@@ -54,24 +54,24 @@
             font-family: 'Montserrat', sans-serif;
             color: white;
             font-weight: 800;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .escolaris-text {
             color: #ff7e26;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
         }
 
         .gold-frame {
             border: 12px solid #d4af37;
             border-image: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            background: #f8fafc;
+            background: #eee;
             width: 100%;
             aspect-ratio: 4/5;
-            max-width: 320px;
+            max-width: 340px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
@@ -80,12 +80,19 @@
             align-items: center;
         }
 
+        .gold-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .name-title {
             color: #1a4a8d;
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 8vw, 3rem);
             line-height: 1;
+            word-break: break-word;
         }
 
         .tag-jurado {
@@ -125,66 +132,37 @@
     <main class="main-card">
         <header class="festival-header">
             <h1 class="festival-title">
-                5.º Festival de Arte <span class="escolaris-text">ESCOLARIS 2026</span>
+                5.º Festival de Arte <br class="block sm:hidden"><span class="escolaris-text">ESCOLARIS 2026</span>
             </h1>
-            <p class="text-blue-100 italic opacity-80 mt-1">“Entre luces y pantallas, museo sin muros”</p>
+            <p class="text-blue-100 italic opacity-80 mt-1 text-sm sm:text-base">“Entre luces y pantallas, museo sin muros”</p>
         </header>
 
-        <div class="p-10 md:p-16">
-            <div class="flex flex-col lg:flex-row gap-12 items-center lg:items-start">
+        <div class="p-6 sm:p-10 md:p-16">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
                 
-                <div class="w-full max-w-[340px] flex-shrink-0">
+                <div class="w-full max-w-[280px] sm:max-w-[360px] flex-shrink-0 mx-auto">
                     <div class="gold-frame">
-                        <!-- Ilustración Fija de Director Musical -->
-                        <svg viewBox="0 0 400 500" class="w-full h-full bg-blue-50">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#f1f5f9;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="400" height="500" fill="url(#grad1)" />
-                            
-                            <!-- Silueta de Director/Maestro (Joven Masculino) -->
-                            <path d="M200,450 L200,350 M200,350 L160,380 M200,350 L240,380 M200,350 C180,350 160,330 160,300 L160,200 C160,160 180,140 200,140 C220,140 240,160 240,200 L240,300 C240,330 220,350 200,350 Z" fill="#1a4a8d" opacity="0.8"/>
-                            <circle cx="200" cy="100" r="40" fill="#1a4a8d" opacity="0.8"/>
-                            
-                            <!-- Batuta y Notas -->
-                            <line x1="240" y1="200" x2="320" y2="120" stroke="#ff7e26" stroke-width="4" stroke-linecap="round"/>
-                            <path d="M320,120 Q350,100 330,70" fill="none" stroke="#ff7e26" stroke-width="2" opacity="0.6"/>
-                            
-                            <!-- Notas musicales flotantes -->
-                            <circle cx="100" cy="150" r="8" fill="#ff7e26"/>
-                            <path d="M108,150 L108,120 L125,130" fill="none" stroke="#ff7e26" stroke-width="3"/>
-                            
-                            <circle cx="280" cy="250" r="6" fill="#1a4a8d"/>
-                            <path d="M286,250 L286,220" stroke="#1a4a8d" stroke-width="2"/>
-                            
-                            <circle cx="80" cy="300" r="5" fill="#1a4a8d"/>
-                            <path d="M85,300 L85,270" stroke="#1a4a8d" stroke-width="2"/>
-                            
-                            <!-- Elementos de enseñanza (Símbolos) -->
-                            <text x="50" y="450" font-family="Montserrat" font-size="20" fill="#ff7e26" opacity="0.5" font-weight="bold">DO RE MI</text>
-                        </svg>
-
-                        <!-- Brillos animados sobre el marco -->
+                        <!-- AQUÍ ES DONDE VA LA FOTO -->
+                        <img src="israel.jpg" alt="Israel - Jurado Calificador" onerror="this.src='https://via.placeholder.com/400x500?text=Sube+Foto+de+Israel'">
+                        
+                        <!-- Brillos animados -->
                         <div class="sparkle" style="top: 5%; left: 5%;"></div>
                         <div class="sparkle" style="bottom: 8%; right: 12%; animation-delay: 1.5s;"></div>
                     </div>
-                    <div class="text-center mt-8">
+                    <div class="text-center mt-6 lg:mt-8">
                         <div class="tag-jurado">JURADO CALIFICADOR</div>
                     </div>
                 </div>
 
-                <div class="flex-1">
+                <div class="flex-1 text-center lg:text-left w-full overflow-hidden">
                     <h2 class="name-title mb-2">Israel</h2>
-                    <p class="text-orange-500 font-extrabold text-xl mb-8 uppercase tracking-widest flex items-center gap-2">
+                    <p class="text-orange-500 font-extrabold text-sm sm:text-base md:text-xl mb-6 lg:mb-8 uppercase tracking-widest flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1">
                         <span>Compositor</span> 
                         <span class="text-blue-200">•</span>
                         <span>Director</span>
                     </p>
 
-                    <div class="space-y-6 text-gray-700 text-lg leading-relaxed text-justify">
+                    <div class="space-y-4 sm:space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
                         <p>
                             Israel es un artista con una trayectoria destacada en el ámbito de la <strong>música académica</strong>, la formación artística y la gestión cultural. Con una vocación sólida por la enseñanza desde los 15 años, ha dedicado su carrera al acompañamiento artístico de niños y jóvenes.
                         </p>
@@ -199,7 +177,7 @@
                     </div>
 
                     <div class="mt-10 border-l-8 border-orange-500 pl-6 py-4 bg-orange-50 rounded-r-xl">
-                        <p class="italic text-gray-600 font-medium">
+                        <p class="italic text-gray-600 font-medium text-left">
                             "Su pasión por la enseñanza inspira a las nuevas generaciones a ver el arte como un medio de formación integral y crecimiento humano."
                         </p>
                     </div>
